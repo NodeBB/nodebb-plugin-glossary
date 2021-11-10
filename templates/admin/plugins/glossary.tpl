@@ -16,6 +16,9 @@
 	<div class="row">
 		<div class="col-sm-2 col-xs-12 settings-header">Keywords</div>
 		<div class="col-sm-10 col-xs-12">
+			<div class="form-group">
+				<button id="upload-csv" class="btn btn-default">Upload CSV</button>
+			</div>
 			<div class="form-group" data-type="sorted-list" data-sorted-list="keywords" data-item-template="admin/plugins/glossary/partials/sorted-list/item" data-form-template="admin/plugins/glossary/partials/sorted-list/form">
 				<ul data-type="list" class="list-group"></ul>
 				<button type="button" data-type="add" class="btn btn-info">Add Item</button>

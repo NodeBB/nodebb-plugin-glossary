@@ -28,7 +28,7 @@ plugin.init = async (params) => {
 function generateRegexes() {
 	if (Array.isArray(settings.keywords)) {
 		settings.keywords.forEach((keyword) => {
-			if (keyword.name) {
+			if (keyword && keyword.name) {
 				keyword.nameRegex = XRegExp(`(?:^|\\s|\\>|;)(${keyword.name})`, 'gi');
 			}
 		});
