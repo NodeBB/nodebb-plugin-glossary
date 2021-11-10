@@ -1,0 +1,20 @@
+{
+	"id": "nodebb-plugin-glossary",
+	"url": "https://github.com/NodeBB/nodebb-plugin-glossary",
+	"library": "./library.js",
+	"hooks": [
+		{ "hook": "static:app.load", "method": "init" },
+		{ "hook": "filter:admin.header.build", "method": "addAdminNavigation" },
+		{ "hook": "filter:parse.post", "method": "filterParsePost", "priority": 6 }
+	],
+	"less": [
+		"static/style.less"
+	],
+	"scripts": [
+		"static/lib/main.js"
+	],
+	"acpScripts": [
+		"static/lib/admin.js"
+	],
+	"templates": "templates"
+}

@@ -1,0 +1,51 @@
+{
+  "name": "nodebb-plugin-glossary",
+  "version": "0.0.1",
+  "description": "A glossary plugin",
+  "main": "library.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NodeBB/nodebb-plugin-glossary"
+  },
+  "keywords": [
+    "nodebb",
+    "plugin",
+    "glossary"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "author": {
+    "name": "barisusakli",
+    "email": "baris@nodebb.org"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NodeBB/nodebb-plugin-glossary/issues"
+  },
+  "readmeFilename": "README.md",
+  "nbbpm": {
+    "compatibility": "^1.15.0"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "14.1.0",
+    "@commitlint/config-angular": "14.1.0",
+    "eslint": "7.32.0",
+    "eslint-config-nodebb": "0.0.3",
+    "eslint-plugin-import": "2.25.2",
+    "husky": "7.0.4",
+    "lint-staged": "11.2.6"
+  }
+}
