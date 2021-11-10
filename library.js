@@ -2,6 +2,8 @@
 
 const _ = require('lodash');
 
+const XRegExp = require.main.require('XRegExp');
+
 const controllers = require('./lib/controllers');
 
 const routeHelpers = require.main.require('./src/routes/helpers');
@@ -28,7 +30,7 @@ function generateRegexes() {
 	if (Array.isArray(settings.keywords)) {
 		settings.keywords.forEach((keyword) => {
 			if (keyword.name) {
-				keyword.nameRegex = new RegExp(`\\b${keyword.name}\\b`, 'gi');
+				keyword.nameRegex = XRegExp(`(?:^|\\s|\\>|;)(${keyword.name})`, 'gi');
 			}
 		});
 	}
@@ -36,17 +38,30 @@ function generateRegexes() {
 
 plugin.filterParsePost = async (hookData) => {
 	if (hookData.postData && hookData.postData.content && settings.enabled !== 'off') {
-		const { keywords } = settings;
-		if (Array.isArray(keywords)) {
-			keywords.forEach((keyword) => {
-				const matches = hookData.postData.content.match(keyword.nameRegex);
+		const originalContent = hookData.postData.content;
+		const foundMatch = {};
+		if (Array.isArray(settings.keywords)) {
+			settings.keywords.forEach((keyword, i) => {
+				const matches = originalContent.match(keyword.nameRegex);
 				if (matches && matches.length) {
 					_.uniq(matches).forEach((match) => {
-						hookData.postData.content = hookData.postData.content.replace(
-							new RegExp(match, 'g'),
-							`<span class="glossary-wrapper" title="${keyword.description}" data-toggle="tooltip" data-placement="top">${match} <i class="fa fa-info fa-sm"></i></span>`
-						);
+						if (match.startsWith(' ') || match.startsWith('>')) {
+							const matchValue = match.slice(1);
+							foundMatch[i] = true;
+							hookData.postData.content = hookData.postData.content.replace(
+								new RegExp(match, 'g'),
+								`${match[0]}<span class="glossary-wrapper" title="glossary-${i}" data-toggle="tooltip" data-placement="top"><span class="glossary-word">${matchValue}</span> <i class="fa fa-info fa-sm"></i></span>`
+							);
+						}
 					});
+				}
+			});
+			settings.keywords.forEach((keyword, i) => {
+				if (foundMatch[i]) {
+					hookData.postData.content = hookData.postData.content.replace(
+						new RegExp(`glossary-${i}`, 'g'),
+						keyword.description
+					);
 				}
 			});
 		}
