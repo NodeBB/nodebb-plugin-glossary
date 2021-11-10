@@ -1,8 +1,7 @@
 'use strict';
 
 const _ = require('lodash');
-
-const XRegExp = require.main.require('XRegExp');
+const XRegExp = require('xregexp');
 
 const controllers = require('./lib/controllers');
 
