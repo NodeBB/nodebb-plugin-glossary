@@ -8,6 +8,18 @@
 					<span class="mdl-switch__label"><strong>Enabled</strong></span>
 				</label>
 			</div>
+			<div class="checkbox">
+				<label for="singleMatch" class="mdl-switch mdl-js-switch mdl-js-ripple-effect">
+					<input type="checkbox" class="mdl-switch__input" id="singleMatch" name="singleMatch">
+					<span class="mdl-switch__label"><strong>Single Match</strong></span>
+				</label>
+			</div>
+			<div class="checkbox">
+				<label for="caseSensitive" class="mdl-switch mdl-js-switch mdl-js-ripple-effect">
+					<input type="checkbox" class="mdl-switch__input" id="caseSensitive" name="caseSensitive">
+					<span class="mdl-switch__label"><strong>Case Sensitive</strong></span>
+				</label>
+			</div>
 		</div>
 	</div>
 
