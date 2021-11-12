@@ -2,9 +2,12 @@
 
 const controllers = require('./lib/controllers');
 
+const db = require.main.require('./src/database');
+const cache = require.main.require('./src/cache');
 const routeHelpers = require.main.require('./src/routes/helpers');
 const meta = require.main.require('./src/meta');
 const pubsub = require.main.require('./src/pubsub');
+const socketAdminPlugins = require.main.require('./src/socket.io/admin/plugins');
 
 const plugin = module.exports;
 
@@ -12,15 +15,27 @@ let settings;
 
 plugin.init = async (params) => {
 	const { router, middleware } = params;
-	settings = await meta.settings.get('glossary');
-	generateRegexes();
+	await loadSettings();
 	pubsub.on(`action:settings.set.glossary`, async () => {
-		settings = await meta.settings.get('glossary');
-		generateRegexes();
+		await loadSettings();
 	});
+
+	socketAdminPlugins.glossary = {};
+	socketAdminPlugins.glossary.empty = async function (socket, data) {
+		const ids = await db.getSortedSetRange(`settings:glossary:sorted-list:keywords`, 0, -1);
+		await db.deleteAll(ids.map(id => `settings:glossary:sorted-list:keywords:${id}`));
+		await db.delete(`settings:glossary:sorted-list:keywords`);
+		cache.del(`settings:glossary`);
+		await loadSettings();
+	};
 
 	routeHelpers.setupAdminPageRoute(router, '/admin/plugins/glossary', middleware, [], controllers.renderAdminPage);
 };
+
+async function loadSettings() {
+	settings = await meta.settings.get('glossary');
+	generateRegexes();
+}
 
 function generateRegexes() {
 	if (Array.isArray(settings.keywords)) {

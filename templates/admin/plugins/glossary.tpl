@@ -30,6 +30,7 @@
 		<div class="col-sm-10 col-xs-12">
 			<div class="form-group">
 				<button id="upload-csv" class="btn btn-default">Upload CSV</button>
+				<button id="empty-glossary" class="btn btn-danger">Delete All</button>
 			</div>
 			<div class="form-group" data-type="sorted-list" data-sorted-list="keywords" data-item-template="admin/plugins/glossary/partials/sorted-list/item" data-form-template="admin/plugins/glossary/partials/sorted-list/form">
 				<ul data-type="list" class="list-group"></ul>

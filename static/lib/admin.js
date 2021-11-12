@@ -1,6 +1,8 @@
 'use strict';
 
-define('admin/plugins/glossary', ['settings', 'settings/sorted-list', 'bootbox', 'benchpress'], function (settings, sortedList, bootbox, benchpress) {
+define('admin/plugins/glossary', [
+	'settings', 'settings/sorted-list', 'bootbox', 'benchpress', 'api', 'alerts',
+], function (settings, sortedList, bootbox, benchpress, alerts) {
 	var ACP = {};
 
 	ACP.init = function () {
@@ -40,11 +42,27 @@ define('admin/plugins/glossary', ['settings', 'settings/sorted-list', 'bootbox',
 			});
 			return false;
 		});
+
+		$('#empty-glossary').on('click', function () {
+			bootbox.confirm('Are you sure you want to delete all keywords?', function (ok) {
+				if (!ok) {
+					return;
+				}
+
+				socket.emit('admin.plugins.glossary.empty', {}, function (err) {
+					if (err) {
+						return alerts.error(err);
+					}
+					ajaxify.refresh();
+				});
+			});
+			return false;
+		});
 	};
 
 	function saveSettings() {
 		settings.save('glossary', $('.glossary-settings'), function () {
-			app.alert({
+			alerts.alert({
 				type: 'success',
 				alert_id: 'glossary-saved',
 				title: 'Settings Saved',
