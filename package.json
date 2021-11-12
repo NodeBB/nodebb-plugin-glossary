@@ -36,7 +36,9 @@
   "nbbpm": {
     "compatibility": "^1.15.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "csvtojson": "^2.0.10"
+  },
   "devDependencies": {
     "@commitlint/cli": "14.1.0",
     "@commitlint/config-angular": "14.1.0",

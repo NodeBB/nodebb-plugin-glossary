@@ -21,7 +21,7 @@ plugin.init = async (params) => {
 	});
 
 	socketAdminPlugins.glossary = {};
-	socketAdminPlugins.glossary.empty = async function (socket, data) {
+	socketAdminPlugins.glossary.empty = async function () {
 		const ids = await db.getSortedSetRange(`settings:glossary:sorted-list:keywords`, 0, -1);
 		await db.deleteAll(ids.map(id => `settings:glossary:sorted-list:keywords:${id}`));
 		await db.delete(`settings:glossary:sorted-list:keywords`);

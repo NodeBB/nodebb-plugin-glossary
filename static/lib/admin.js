@@ -1,7 +1,9 @@
 'use strict';
 
+/* globals csv */
+
 define('admin/plugins/glossary', [
-	'settings', 'settings/sorted-list', 'bootbox', 'benchpress', 'api', 'alerts',
+	'settings', 'settings/sorted-list', 'bootbox', 'benchpress', 'alerts',
 ], function (settings, sortedList, bootbox, benchpress, alerts) {
 	var ACP = {};
 
@@ -19,22 +21,18 @@ define('admin/plugins/glossary', [
 						className: 'btn-primary',
 						callback: async function () {
 							const text = modal.find('#csv-input').val();
-							const lines = text.split('\n');
+							const lines = await csv({
+								noheader: true,
+								output: 'json',
+							}).fromString(text);
+
 							// eslint-disable-next-line no-restricted-syntax
 							for (const line of lines) {
-								const parts = line.split(',');
-								const name = parts.shift().trim();
-								let description = parts.join(',').trim();
-								if (description.startsWith('"') && description.endsWith('"')) {
-									description = description.slice(1, -1);
-								}
-								if (name && description) {
-									// eslint-disable-next-line no-await-in-loop
-									const form = $(await benchpress.render('admin/plugins/glossary/partials/sorted-list/form', {}));
-									form.find('#name').val(name);
-									form.find('#description').val(description);
-									sortedList.addItem(form.children(), $('[data-sorted-list="keywords"]'));
-								}
+								// eslint-disable-next-line no-await-in-loop
+								const form = $(await benchpress.render('admin/plugins/glossary/partials/sorted-list/form', {}));
+								form.find('#name').val(line.field1);
+								form.find('#description').val(line.field2);
+								sortedList.addItem(form.children(), $('[data-sorted-list="keywords"]'));
 							}
 						},
 					},
