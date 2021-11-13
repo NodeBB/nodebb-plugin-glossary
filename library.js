@@ -4,6 +4,7 @@ const controllers = require('./lib/controllers');
 
 const db = require.main.require('./src/database');
 const cache = require.main.require('./src/cache');
+const utils = require.main.require('./src/utils');
 const routeHelpers = require.main.require('./src/routes/helpers');
 const meta = require.main.require('./src/meta');
 const pubsub = require.main.require('./src/pubsub');
@@ -46,9 +47,11 @@ function generateRegexes() {
 		if (settings.caseSensitive !== 'on') {
 			options += 'i';
 		}
-		settings.keywords.forEach((keyword) => {
+		settings.keywords.forEach((keyword, i) => {
 			if (keyword && keyword.name) {
-				keyword.nameRegex = new RegExp(`\\b(${keyword.name})\\b`, options);
+				const escaped = utils.escapeRegexChars(keyword.name);
+				keyword.nameRegex = new RegExp(`(?:^|\\s|\\>|;)\\b(${escaped})\\b`, options);
+				keyword.titleRegex = new RegExp(`title="glossary-${i}"`, 'g');
 			}
 		});
 	}
@@ -60,14 +63,21 @@ plugin.filterParsePost = async (hookData) => {
 			settings.keywords.forEach((keyword, i) => {
 				hookData.postData.content = hookData.postData.content.replace(
 					keyword.nameRegex,
-					`<span class="glossary-wrapper" title="glossary-${i}" data-toggle="tooltip" data-placement="top"><span class="glossary-word">$1</span> <i class="fa fa-info fa-sm"></i></span>`
+					(match, p1) => {
+						const space = match.startsWith(' ') ? ' ' : '';
+						return `
+							<span class="glossary-wrapper" title="glossary-${i}" data-toggle="tooltip" data-placement="top">
+								${space}<span class="glossary-word">${p1}</span> <i class="fa fa-info fa-sm"></i>
+							</span>
+						`;
+					},
 				);
 			});
 
-			settings.keywords.forEach((keyword, i) => {
+			settings.keywords.forEach((keyword) => {
 				hookData.postData.content = hookData.postData.content.replace(
-					new RegExp(`glossary-${i}`, 'g'),
-					keyword.description
+					keyword.titleRegex,
+					() => `title="${keyword.description}"`
 				);
 			});
 		}
