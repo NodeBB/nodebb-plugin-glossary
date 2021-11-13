@@ -35,10 +35,10 @@ plugin.init = async (params) => {
 
 async function loadSettings() {
 	settings = await meta.settings.get('glossary');
-	generateRegexes();
+	plugin.generateRegexes(settings);
 }
 
-function generateRegexes() {
+plugin.generateRegexes = function (settings) {
 	if (Array.isArray(settings.keywords)) {
 		let options = '';
 		if (settings.singleMatch !== 'on') {
@@ -55,34 +55,34 @@ function generateRegexes() {
 			}
 		});
 	}
-}
+};
 
 plugin.filterParsePost = async (hookData) => {
 	if (hookData.postData && hookData.postData.content && settings.enabled !== 'off') {
-		if (Array.isArray(settings.keywords)) {
-			settings.keywords.forEach((keyword, i) => {
-				hookData.postData.content = hookData.postData.content.replace(
-					keyword.nameRegex,
-					(match, p1) => {
-						const space = match.startsWith(' ') ? ' ' : '';
-						return `
-							<span class="glossary-wrapper" title="glossary-${i}" data-toggle="tooltip" data-placement="top">
-								${space}<span class="glossary-word">${p1}</span> <i class="fa fa-info fa-sm"></i>
-							</span>
-						`;
-					},
-				);
-			});
-
-			settings.keywords.forEach((keyword) => {
-				hookData.postData.content = hookData.postData.content.replace(
-					keyword.titleRegex,
-					() => `title="${keyword.description}"`
-				);
-			});
-		}
+		plugin.parsePost(hookData.postData, settings);
 	}
 	return hookData;
+};
+
+plugin.parsePost = function (postData, settings) {
+	if (Array.isArray(settings.keywords)) {
+		settings.keywords.forEach((keyword, i) => {
+			postData.content = postData.content.replace(
+				keyword.nameRegex,
+				(match, p1) => {
+					const prefix = match.slice(0, match.indexOf(p1)) || '';
+					return `${prefix}<span class="glossary-wrapper" title="glossary-${i}" data-toggle="tooltip" data-placement="top"><span class="glossary-word">${p1}</span> <i class="fa fa-info fa-sm"></i></span>`;
+				},
+			);
+		});
+
+		settings.keywords.forEach((keyword) => {
+			postData.content = postData.content.replace(
+				keyword.titleRegex,
+				() => `title="${keyword.description}"`
+			);
+		});
+	}
 };
 
 plugin.addAdminNavigation = (header) => {
