@@ -13,6 +13,10 @@ describe('nodebb-plugin-glossary', () => {
 				name: 'REDIS',
 				description: 'a fast in memory database',
 			},
+			{
+				name: 'mysql',
+				description: 'a popular sql database',
+			},
 		],
 	};
 
@@ -53,10 +57,24 @@ describe('nodebb-plugin-glossary', () => {
 			content: `<p dir="auto">redis is a very fast database, REDIS uses ram. redis.</p>`,
 		};
 		plugin.parsePost(postData, settings);
-		console.log(postData.content);
 		assert.strictEqual(
 			postData.content,
 			`<p dir="auto">redis is a very fast database, <span class="glossary-wrapper" title="a fast in memory database" data-toggle="tooltip" data-placement="top"><span class="glossary-word">REDIS</span> <i class="fa fa-info fa-sm"></i></span> uses ram. redis.</p>`
+		);
+	});
+
+	it('should not match words in tags', () => {
+		const plugin = require('../library');
+		settings.singleMatch = 'on';
+		settings.caseSensitive = 'off';
+		plugin.generateRegexes(settings);
+		const postData = {
+			content: `<p redis dir="redis">redis is a very fast database, REDIS uses ram. redis.</p>`,
+		};
+		plugin.parsePost(postData, settings);
+		assert.strictEqual(
+			postData.content,
+			`<p redis dir="redis"><span class="glossary-wrapper" title="a fast in memory database" data-toggle="tooltip" data-placement="top"><span class="glossary-word">redis</span> <i class="fa fa-info fa-sm"></i></span> is a very fast database, REDIS uses ram. redis.</p>`
 		);
 	});
 });

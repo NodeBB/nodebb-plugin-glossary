@@ -50,7 +50,7 @@ plugin.generateRegexes = function (settings) {
 		settings.keywords.forEach((keyword, i) => {
 			if (keyword && keyword.name) {
 				const escaped = utils.escapeRegexChars(keyword.name);
-				keyword.nameRegex = new RegExp(`(?:^|\\s|\\>|;)\\b(${escaped})\\b`, options);
+				keyword.nameRegex = new RegExp(`\\b(${escaped})\\b(?=[^>]*<)`, options);
 				keyword.titleRegex = new RegExp(`title="glossary-${i}"`, 'g');
 			}
 		});
@@ -69,10 +69,7 @@ plugin.parsePost = function (postData, settings) {
 		settings.keywords.forEach((keyword, i) => {
 			postData.content = postData.content.replace(
 				keyword.nameRegex,
-				(match, p1) => {
-					const prefix = match.slice(0, match.indexOf(p1)) || '';
-					return `${prefix}<span class="glossary-wrapper" title="glossary-${i}" data-toggle="tooltip" data-placement="top"><span class="glossary-word">${p1}</span> <i class="fa fa-info fa-sm"></i></span>`;
-				},
+				(match, p1) => `<span class="glossary-wrapper" title="glossary-${i}" data-toggle="tooltip" data-placement="top"><span class="glossary-word">${p1}</span> <i class="fa fa-info fa-sm"></i></span>`,
 			);
 		});
 
