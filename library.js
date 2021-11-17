@@ -47,11 +47,10 @@ plugin.generateRegexes = function (settings) {
 		if (settings.caseSensitive !== 'on') {
 			options += 'i';
 		}
-		settings.keywords.forEach((keyword, i) => {
+		settings.keywords.forEach((keyword) => {
 			if (keyword && keyword.name) {
 				const escaped = utils.escapeRegexChars(keyword.name);
 				keyword.nameRegex = new RegExp(`\\b(${escaped})\\b(?=[^>]*<)`, options);
-				keyword.titleRegex = new RegExp(`title="glossary-${i}"`, 'g');
 			}
 		});
 	}
@@ -65,21 +64,17 @@ plugin.filterParsePost = async (hookData) => {
 };
 
 plugin.parsePost = function (postData, settings) {
-	if (Array.isArray(settings.keywords)) {
-		settings.keywords.forEach((keyword, i) => {
-			postData.content = postData.content.replace(
-				keyword.nameRegex,
-				(match, p1) => `<span class="glossary-wrapper" title="glossary-${i}" data-toggle="tooltip" data-placement="top"><span class="glossary-word">${p1}</span> <i class="fa fa-info fa-sm"></i></span>`,
-			);
-		});
+	var st = process.hrtime();
 
+	if (Array.isArray(settings.keywords)) {
 		settings.keywords.forEach((keyword) => {
 			postData.content = postData.content.replace(
-				keyword.titleRegex,
-				() => `title="${keyword.description}"`
+				keyword.nameRegex,
+				(match, p1) => `<span class="glossary-wrapper" title="${keyword.description}" data-toggle="tooltip" data-placement="top"><span class="glossary-word">${p1}</span> <i class="fa fa-info fa-sm"></i></span>`,
 			);
 		});
 	}
+	process.profile('asd', st);
 };
 
 plugin.addAdminNavigation = (header) => {
