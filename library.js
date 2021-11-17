@@ -64,8 +64,6 @@ plugin.filterParsePost = async (hookData) => {
 };
 
 plugin.parsePost = function (postData, settings) {
-	var st = process.hrtime();
-
 	if (Array.isArray(settings.keywords)) {
 		settings.keywords.forEach((keyword) => {
 			postData.content = postData.content.replace(
@@ -74,7 +72,6 @@ plugin.parsePost = function (postData, settings) {
 			);
 		});
 	}
-	process.profile('asd', st);
 };
 
 plugin.addAdminNavigation = (header) => {
