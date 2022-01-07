@@ -36,6 +36,10 @@ plugin.init = async (params) => {
 
 async function loadSettings() {
 	settings = await meta.settings.get('glossary');
+	if (!settings.hasOwnProperty('icon')) {
+		settings.icon = 'fa-info';
+		await meta.settings.setOne('glossary', 'icon', 'fa-info');
+	}
 	plugin.generateRegexes(settings);
 }
 
@@ -66,10 +70,14 @@ plugin.filterParsePost = async (hookData) => {
 
 plugin.parsePost = function (postData, settings) {
 	if (Array.isArray(settings.keywords)) {
+		let iconHtml = '';
+		if (settings.icon) {
+			iconHtml = `<i class="fa ${settings.icon} fa-sm"></i>`;
+		}
 		settings.keywords.forEach((keyword) => {
 			postData.content = postData.content.replace(
 				keyword.nameRegex,
-				(match, p1) => `<span class="glossary-wrapper" title="${keyword.description}" data-toggle="tooltip" data-placement="top"><span class="glossary-word">${p1}</span> <i class="fa fa-info fa-sm"></i></span>`,
+				(match, p1) => `<span class="glossary-wrapper" title="${keyword.description}" data-toggle="tooltip" data-placement="top"><span class="glossary-word">${p1}</span> ${iconHtml}</span>`,
 			);
 		});
 	}

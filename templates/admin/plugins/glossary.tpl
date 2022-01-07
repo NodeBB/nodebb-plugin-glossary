@@ -20,6 +20,12 @@
 					<span class="mdl-switch__label"><strong>Case Sensitive</strong></span>
 				</label>
 			</div>
+			<div class="form-group">
+				<label for="icon">
+					Icon to show next to keyword, leave empty to disable
+				</label>
+				<input class="form-control"  type="text" name="icon" id="icon">
+			</div>
 		</div>
 	</div>
 
