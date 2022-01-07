@@ -30,6 +30,7 @@ plugin.init = async (params) => {
 		await loadSettings();
 	};
 
+	routeHelpers.setupPageRoute(router, '/glossary', middleware, [], controllers.renderGlossary);
 	routeHelpers.setupAdminPageRoute(router, '/admin/plugins/glossary', middleware, [], controllers.renderAdminPage);
 };
 
