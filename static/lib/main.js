@@ -1,7 +1,14 @@
 'use strict';
 
 $(document).ready(function () {
-	$(window).on('action:posts.loaded action:topic.loaded action:posts.edited', function () {
-		$('.glossary-wrapper').tooltip();
+	$('#content').on('mouseenter', '.glossary-wrapper', function (ev) {
+		const $this = $(this);
+		if ($this.attr('data-original-title')) {
+			return;
+		}
+		$this.tooltip({
+			container: '#content',
+		});
+		$this.trigger(ev);
 	});
 });

@@ -83,6 +83,11 @@ plugin.parsePost = function (postData, settings) {
 	}
 };
 
+plugin.filterTeasersConfigureStripTags = function (hookData) {
+	hookData.tags = hookData.tags.filter(tag => tag !== 'span');
+	return hookData;
+};
+
 plugin.addAdminNavigation = (header) => {
 	header.plugins.push({
 		route: '/plugins/glossary',

@@ -4,7 +4,8 @@
 	"hooks": [
 		{ "hook": "static:app.load", "method": "init" },
 		{ "hook": "filter:admin.header.build", "method": "addAdminNavigation" },
-		{ "hook": "filter:parse.post", "method": "filterParsePost", "priority": 6 }
+		{ "hook": "filter:parse.post", "method": "filterParsePost", "priority": 6 },
+		{ "hook": "filter:teasers.configureStripTags", "method": "filterTeasersConfigureStripTags" }
 	],
 	"less": [
 		"static/style.less"
