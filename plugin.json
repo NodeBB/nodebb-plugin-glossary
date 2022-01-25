@@ -17,5 +17,6 @@
 		"node_modules/csvtojson/browser/csvtojson.min.js",
 		"static/lib/admin.js"
 	],
-	"templates": "templates"
+	"templates": "templates",
+	"languages": "languages"
 }

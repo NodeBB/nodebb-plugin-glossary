@@ -1,4 +1,4 @@
-<h2>Glossary</h2>
+<h2>[[glossary:title]]</h2>
 <ul class="list-group">
 {{{ each keywords }}}
 <li class="list-group-item">
