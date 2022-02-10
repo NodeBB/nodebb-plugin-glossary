@@ -3,6 +3,7 @@
         <div class="col-xs-9">
             <strong>{name}</strong><br />
             <small>{description}</small>
+            <small class="help-block">{info}</small>
         </div>
         <div class="col-xs-3 text-right">
             <button type="button" data-type="edit" class="btn btn-info">Edit</button>

@@ -88,6 +88,32 @@ plugin.filterTeasersConfigureStripTags = function (hookData) {
 	return hookData;
 };
 
+plugin.defineWidgetAreas = async function (areas) {
+	areas = areas.concat([
+		{
+			name: 'Glossary Page (Header)',
+			template: 'glossary.tpl',
+			location: 'header',
+		},
+		{
+			name: 'Glossary Page (Left)',
+			template: 'glossary.tpl',
+			location: 'left',
+		},
+		{
+			name: 'Glossary Page (Right)',
+			template: 'glossary.tpl',
+			location: 'right',
+		},
+		{
+			name: 'Glossary Page (Footer)',
+			template: 'glossary.tpl',
+			location: 'footer',
+		},
+	]);
+	return areas;
+};
+
 plugin.addAdminNavigation = (header) => {
 	header.plugins.push({
 		route: '/plugins/glossary',
