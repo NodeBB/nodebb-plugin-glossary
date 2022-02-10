@@ -32,6 +32,7 @@ define('admin/plugins/glossary', [
 								const form = $(await benchpress.render('admin/plugins/glossary/partials/sorted-list/form', {}));
 								form.find('#name').val(line.field1);
 								form.find('#description').val(line.field2);
+								form.find('#info').val(line.field3 || '');
 								sortedList.addItem(form.children(), $('[data-sorted-list="keywords"]'));
 							}
 						},
