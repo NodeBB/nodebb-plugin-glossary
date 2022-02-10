@@ -72,12 +72,12 @@ plugin.parsePost = function (postData, settings) {
 	if (Array.isArray(settings.keywords)) {
 		let iconHtml = '';
 		if (settings.icon) {
-			iconHtml = `<i class="fa ${settings.icon} fa-sm"></i>`;
+			iconHtml = ` <i class="fa ${settings.icon} fa-sm"></i>`;
 		}
 		settings.keywords.forEach((keyword) => {
 			postData.content = postData.content.replace(
 				keyword.nameRegex,
-				(match, p1) => `<span class="glossary-wrapper" title="${keyword.description}" data-toggle="tooltip" data-placement="top"><span class="glossary-word">${p1}</span> ${iconHtml}</span>`,
+				(match, p1) => `<span class="glossary-wrapper" title="${keyword.description}" data-toggle="tooltip" data-placement="top"><span class="glossary-word">${p1}</span>${iconHtml}</span>`,
 			);
 		});
 	}
