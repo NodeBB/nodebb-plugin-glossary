@@ -15,9 +15,11 @@
 		"static/lib/main.js"
 	],
 	"acpScripts": [
-		"node_modules/csvtojson/browser/csvtojson.min.js",
-		"static/lib/admin.js"
+		"node_modules/csvtojson/browser/csvtojson.min.js"
 	],
+	"modules": {
+		"../admin/plugins/glossary.js": "static/lib/admin.js"
+	},
 	"templates": "templates",
 	"languages": "languages"
 }
