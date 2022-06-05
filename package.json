@@ -1,6 +1,6 @@
 {
   "name": "nodebb-plugin-glossary",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "description": "A glossary plugin",
   "main": "library.js",
   "repository": {
