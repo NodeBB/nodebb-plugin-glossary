@@ -8,8 +8,8 @@
 		{ "hook": "filter:teasers.configureStripTags", "method": "filterTeasersConfigureStripTags" },
 		{ "hook": "filter:widgets.getAreas", "method": "defineWidgetAreas" }
 	],
-	"less": [
-		"static/style.less"
+	"scss": [
+		"static/style.scss"
 	],
 	"scripts": [
 		"static/lib/main.js"
