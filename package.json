@@ -34,7 +34,7 @@
   },
   "readmeFilename": "README.md",
   "nbbpm": {
-    "compatibility": "^3.0.0"
+    "compatibility": "^3.2.0"
   },
   "dependencies": {
     "csvtojson": "^2.0.10",

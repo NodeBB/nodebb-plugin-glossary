@@ -1,13 +1,13 @@
 <li data-type="item" class="list-group-item">
-    <div class="row">
-        <div class="col-xs-9">
+    <div class="d-flex justify-content-between gap-1">
+        <div class="">
             <strong>{name}</strong><br />
-            <small>{description}</small>
-            <small class="help-block">{info}</small>
+            <small>{description}</small><br/>
+            <small class="form-text">{info}</small>
         </div>
-        <div class="col-xs-3 text-right">
-            <button type="button" data-type="edit" class="btn btn-info">Edit</button>
-            <button type="button" data-type="remove" class="btn btn-danger">Delete</button>
+        <div class="d-flex flex-nowrap gap-1 justify-content-end align-items-start">
+            <button type="button" data-type="edit" class="btn btn-info btn-sm">Edit</button>
+            <button type="button" data-type="remove" class="btn btn-danger btn-sm">Delete</button>
         </div>
     </div>
 </li>
