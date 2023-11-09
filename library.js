@@ -15,7 +15,7 @@ const plugin = module.exports;
 let settings;
 
 plugin.init = async (params) => {
-	const { router, middleware } = params;
+	const { router } = params;
 	await loadSettings();
 	pubsub.on(`action:settings.set.glossary`, async () => {
 		await loadSettings();
@@ -30,8 +30,8 @@ plugin.init = async (params) => {
 		await loadSettings();
 	};
 
-	routeHelpers.setupPageRoute(router, '/glossary', middleware, [], controllers.renderGlossary);
-	routeHelpers.setupAdminPageRoute(router, '/admin/plugins/glossary', middleware, [], controllers.renderAdminPage);
+	routeHelpers.setupPageRoute(router, '/glossary', controllers.renderGlossary);
+	routeHelpers.setupAdminPageRoute(router, '/admin/plugins/glossary', controllers.renderAdminPage);
 };
 
 async function loadSettings() {
