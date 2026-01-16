@@ -30,8 +30,8 @@ plugin.init = async (params) => {
 		await loadSettings();
 	};
 
-	routeHelpers.setupPageRoute(router, '/glossary', controllers.renderGlossary);
-	routeHelpers.setupAdminPageRoute(router, '/admin/plugins/glossary', controllers.renderAdminPage);
+	routeHelpers.setupPageRoute(router, '/glossary', [], controllers.renderGlossary);
+	routeHelpers.setupAdminPageRoute(router, '/admin/plugins/glossary', [], controllers.renderAdminPage);
 };
 
 async function loadSettings() {
@@ -91,22 +91,22 @@ plugin.filterTeasersConfigureStripTags = function (hookData) {
 plugin.defineWidgetAreas = async function (areas) {
 	areas = areas.concat([
 		{
-			name: 'Glossary Page (Header)',
+			name: '[[glossary:widgets.header]]',
 			template: 'glossary.tpl',
 			location: 'header',
 		},
 		{
-			name: 'Glossary Page (Left)',
+			name: '[[glossary:widgets.left]]',
 			template: 'glossary.tpl',
 			location: 'left',
 		},
 		{
-			name: 'Glossary Page (Right)',
+			name: '[[glossary:widgets.right]]',
 			template: 'glossary.tpl',
 			location: 'right',
 		},
 		{
-			name: 'Glossary Page (Footer)',
+			name: '[[glossary:widgets.footer]]',
 			template: 'glossary.tpl',
 			location: 'footer',
 		},
@@ -118,7 +118,7 @@ plugin.addAdminNavigation = (header) => {
 	header.plugins.push({
 		route: '/plugins/glossary',
 		icon: 'fa-info',
-		name: 'Glossary',
+		name: '[[glossary:title]]',
 	});
 
 	return header;

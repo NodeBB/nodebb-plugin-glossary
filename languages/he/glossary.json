@@ -1,0 +1,31 @@
+{
+    "title": "מילון מונחים",
+    "widgets": {
+        "header": "דף מילון מונחים (כותרת)",
+        "left": "דף מילון מונחים (שמאל)",
+        "right": "דף מילון מונחים (ימין)",
+        "footer": "דף מילון מונחים (תחתית)"
+    },
+    "admin": {
+        "general": "כללי",
+        "enabled": "מופעל",
+        "singleMatch": "התאמה בודדת",
+        "caseSensitive": "תלוי רישיות",
+        "iconLabel": "אייקון להצגה ליד מילת מפתח, השאר ריק לביטול",
+        "keywords": "מילות מפתח",
+        "uploadCsv": "העלאת CSV",
+        "deleteAll": "מחק הכל",
+        "addItem": "הוסף פריט",
+        "edit": "עריכה",
+        "delete": "מחיקה",
+        "add": "הוסף",
+        "confirmDeleteAll": "האם אתה בטוח שברצונך למחוק את כל מילות המפתח?",
+        "settingsSaved": "ההגדרות נשמרו",
+        "reloadMessage": "אנא טען מחדש את NodeBB כדי להחיל הגדרות אלו",
+        "form": {
+            "name": "שם",
+            "description": "תיאור",
+            "infoLabel": "מידע (אופציונלי). מוצג בדף /glossary"
+        }
+    }
+}

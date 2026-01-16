@@ -1,3 +1,31 @@
 {
-    "title": "Sözlük"
-} 
+    "title": "Sözlük",
+    "widgets": {
+        "header": "Sözlük Sayfası (Üst)",
+        "left": "Sözlük Sayfası (Sol)",
+        "right": "Sözlük Sayfası (Sağ)",
+        "footer": "Sözlük Sayfası (Alt)"
+    },
+    "admin": {
+        "general": "Genel",
+        "enabled": "Etkin",
+        "singleMatch": "Tek Eşleşme",
+        "caseSensitive": "Büyük/Küçük Harf Duyarlı",
+        "iconLabel": "Anahtar kelimenin yanında gösterilecek simge, devre dışı bırakmak için boş bırakın",
+        "keywords": "Anahtar Kelimeler",
+        "uploadCsv": "CSV Yükle",
+        "deleteAll": "Tümünü Sil",
+        "addItem": "Öğe Ekle",
+        "edit": "Düzenle",
+        "delete": "Sil",
+        "add": "Ekle",
+        "confirmDeleteAll": "Tüm anahtar kelimeleri silmek istediğinizden emin misiniz?",
+        "settingsSaved": "Ayarlar Kaydedildi",
+        "reloadMessage": "Bu ayarları uygulamak için lütfen NodeBB'yi yeniden yükleyin",
+        "form": {
+            "name": "Ad",
+            "description": "Açıklama",
+            "infoLabel": "Bilgi (isteğe bağlı). /glossary sayfasında görüntülenir"
+        }
+    }
+}

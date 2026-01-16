@@ -1,3 +1,31 @@
 {
-    "title": "Glossary"
+    "title": "Glossary",
+    "widgets": {
+        "header": "Glossary Page (Header)",
+        "left": "Glossary Page (Left)",
+        "right": "Glossary Page (Right)",
+        "footer": "Glossary Page (Footer)"
+    },
+    "admin": {
+        "general": "General",
+        "enabled": "Enabled",
+        "singleMatch": "Single Match",
+        "caseSensitive": "Case Sensitive",
+        "iconLabel": "Icon to show next to keyword, leave empty to disable",
+        "keywords": "Keywords",
+        "uploadCsv": "Upload CSV",
+        "deleteAll": "Delete All",
+        "addItem": "Add Item",
+        "edit": "Edit",
+        "delete": "Delete",
+        "add": "Add",
+        "confirmDeleteAll": "Are you sure you want to delete all keywords?",
+        "settingsSaved": "Settings Saved",
+        "reloadMessage": "Please reload your NodeBB to apply these settings",
+        "form": {
+            "name": "Name",
+            "description": "Description",
+            "infoLabel": "Info (optional). Displayed on the /glossary page"
+        }
+    }
 }

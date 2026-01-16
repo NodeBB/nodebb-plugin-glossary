@@ -3,21 +3,23 @@
 /* globals csv */
 
 define('admin/plugins/glossary', [
-	'settings', 'settings/sorted-list', 'bootbox', 'benchpress', 'alerts',
-], function (settings, sortedList, bootbox, benchpress, alerts) {
+	'settings', 'settings/sorted-list', 'bootbox', 'benchpress', 'alerts', 'translator',
+], function (settings, sortedList, bootbox, benchpress, alerts, translator) {
 	var ACP = {};
 
 	ACP.init = function () {
 		settings.load('glossary', $('.glossary-settings'));
 		$('#save').on('click', saveSettings);
 
-		$('#upload-csv').on('click', function () {
+		$('#upload-csv').on('click', async function () {
+			const title = await translator.translate('[[glossary:admin.uploadCsv]]');
+			const addLabel = await translator.translate('[[glossary:admin.add]]');
 			const modal = bootbox.dialog({
-				title: 'Upload CSV',
+				title: title,
 				message: '<textarea id="csv-input" class="form-control"></textarea>',
 				buttons: {
 					submit: {
-						label: 'Add',
+						label: addLabel,
 						className: 'btn-primary',
 						callback: async function () {
 							const text = modal.find('#csv-input').val();
@@ -42,8 +44,9 @@ define('admin/plugins/glossary', [
 			return false;
 		});
 
-		$('#empty-glossary').on('click', function () {
-			bootbox.confirm('Are you sure you want to delete all keywords?', function (ok) {
+		$('#empty-glossary').on('click', async function () {
+			const confirmMsg = await translator.translate('[[glossary:admin.confirmDeleteAll]]');
+			bootbox.confirm(confirmMsg, function (ok) {
 				if (!ok) {
 					return;
 				}
@@ -59,13 +62,15 @@ define('admin/plugins/glossary', [
 		});
 	};
 
-	function saveSettings() {
+	async function saveSettings() {
+		const savedTitle = await translator.translate('[[glossary:admin.settingsSaved]]');
+		const savedMessage = await translator.translate('[[glossary:admin.reloadMessage]]');
 		settings.save('glossary', $('.glossary-settings'), function () {
 			alerts.alert({
 				type: 'success',
 				alert_id: 'glossary-saved',
-				title: 'Settings Saved',
-				message: 'Please reload your NodeBB to apply these settings',
+				title: savedTitle,
+				message: savedMessage,
 				clickfn: function () {
 					socket.emit('admin.reload');
 				},

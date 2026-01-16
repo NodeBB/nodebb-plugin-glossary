@@ -1,3 +1,31 @@
 {
-    "title": "Wörterbuch"
-} 
+    "title": "Wörterbuch",
+    "widgets": {
+        "header": "Wörterbuch-Seite (Kopfzeile)",
+        "left": "Wörterbuch-Seite (Links)",
+        "right": "Wörterbuch-Seite (Rechts)",
+        "footer": "Wörterbuch-Seite (Fußzeile)"
+    },
+    "admin": {
+        "general": "Allgemein",
+        "enabled": "Aktiviert",
+        "singleMatch": "Einzelne Übereinstimmung",
+        "caseSensitive": "Groß-/Kleinschreibung beachten",
+        "iconLabel": "Symbol neben Schlüsselwort anzeigen, leer lassen zum Deaktivieren",
+        "keywords": "Schlüsselwörter",
+        "uploadCsv": "CSV hochladen",
+        "deleteAll": "Alle löschen",
+        "addItem": "Element hinzufügen",
+        "edit": "Bearbeiten",
+        "delete": "Löschen",
+        "add": "Hinzufügen",
+        "confirmDeleteAll": "Sind Sie sicher, dass Sie alle Schlüsselwörter löschen möchten?",
+        "settingsSaved": "Einstellungen gespeichert",
+        "reloadMessage": "Bitte laden Sie NodeBB neu, um diese Einstellungen anzuwenden",
+        "form": {
+            "name": "Name",
+            "description": "Beschreibung",
+            "infoLabel": "Info (optional). Wird auf der /glossary Seite angezeigt"
+        }
+    }
+}
