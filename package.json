@@ -7,6 +7,9 @@
     "type": "git",
     "url": "https://github.com/NodeBB/nodebb-plugin-glossary"
   },
+  "scripts": {
+    "lint": "eslint ."
+  },
   "keywords": [
     "nodebb",
     "plugin",
@@ -34,19 +37,17 @@
   },
   "readmeFilename": "README.md",
   "nbbpm": {
-    "compatibility": "^3.2.0"
+    "compatibility": "^4.14.0"
   },
   "dependencies": {
     "csvtojson": "^2.0.10",
-    "lodash": "^4.17.21",
-    "validator": "^13.7.0"
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@commitlint/cli": "14.1.0",
     "@commitlint/config-angular": "14.1.0",
-    "eslint": "7.32.0",
-    "eslint-config-nodebb": "0.0.3",
-    "eslint-plugin-import": "2.25.2",
+    "eslint": "10.7.0",
+    "eslint-config-nodebb": "2.0.3",
     "husky": "7.0.4",
     "lint-staged": "11.2.6"
   }

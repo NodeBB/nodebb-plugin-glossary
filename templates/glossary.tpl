@@ -19,7 +19,7 @@
     {{{ if ((widgets.left.length && !widgets.right.length) || (!widgets.left.length && widgets.right.length)) }}}
     <div class="col-lg-9 col-sm-12">
     {{{ end }}}
-        <h2>[[glossary:title]]</h2>
+        <h2>{{tx("glossary:title")}}</h2>
         <ul class="list-group">
         {{{ each keywords }}}
         <li class="list-group-item">
@@ -29,7 +29,7 @@
                     <p class="help-block">{./description}</p>
                 </div>
                 <div class="col-lg-9">
-                    <p>{./info}</p>
+                    {{./info}}
                 </div>
             </div>
         </li>

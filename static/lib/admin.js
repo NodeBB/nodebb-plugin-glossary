@@ -5,7 +5,7 @@
 define('admin/plugins/glossary', [
 	'settings', 'settings/sorted-list', 'bootbox', 'benchpress', 'alerts',
 ], function (settings, sortedList, bootbox, benchpress, alerts) {
-	var ACP = {};
+	const ACP = {};
 
 	ACP.init = function () {
 		settings.load('glossary', $('.glossary-settings'));
@@ -26,7 +26,6 @@ define('admin/plugins/glossary', [
 								output: 'json',
 							}).fromString(text);
 
-							// eslint-disable-next-line no-restricted-syntax
 							for (const line of lines) {
 								// eslint-disable-next-line no-await-in-loop
 								const form = $(await benchpress.render('admin/plugins/glossary/partials/sorted-list/form', {}));

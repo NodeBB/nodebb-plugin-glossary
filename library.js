@@ -2,13 +2,13 @@
 
 const controllers = require('./lib/controllers');
 
-const db = require.main.require('./src/database');
-const cache = require.main.require('./src/cache');
-const utils = require.main.require('./src/utils');
-const routeHelpers = require.main.require('./src/routes/helpers');
-const meta = require.main.require('./src/meta');
-const pubsub = require.main.require('./src/pubsub');
-const socketAdminPlugins = require.main.require('./src/socket.io/admin/plugins');
+const db = nodebb.require('./src/database');
+const cache = nodebb.require('./src/cache');
+const utils = nodebb.require('./src/utils');
+const routeHelpers = nodebb.require('./src/routes/helpers');
+const meta = nodebb.require('./src/meta');
+const pubsub = nodebb.require('./src/pubsub');
+const socketAdminPlugins = nodebb.require('./src/socket.io/admin/plugins');
 
 const plugin = module.exports;
 
@@ -88,7 +88,7 @@ plugin.filterTeasersConfigureStripTags = function (hookData) {
 	return hookData;
 };
 
-plugin.defineWidgetAreas = async function (areas) {
+plugin.defineWidgetAreas = function (areas) {
 	areas = areas.concat([
 		{
 			name: 'Glossary Page (Header)',
