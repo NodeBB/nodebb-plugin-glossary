@@ -3,16 +3,17 @@
 /* globals csv */
 
 define('admin/plugins/glossary', [
-	'settings', 'settings/sorted-list', 'bootbox', 'benchpress', 'alerts',
-], function (settings, sortedList, bootbox, benchpress, alerts) {
+	'settings', 'settings/sorted-list', 'modals', 'benchpress', 'alerts',
+], function (settings, sortedList, modals, benchpress, alerts) {
 	const ACP = {};
 
 	ACP.init = function () {
 		settings.load('glossary', $('.glossary-settings'));
 		$('#save').on('click', saveSettings);
 
-		$('#upload-csv').on('click', function () {
-			const modal = bootbox.dialog({
+		$('#upload-csv').on('click', async function (ev) {
+			ev.preventDefault();
+			const modal = await modals.dialog({
 				title: 'Upload CSV',
 				message: '<textarea id="csv-input" class="form-control"></textarea>',
 				buttons: {
@@ -42,7 +43,7 @@ define('admin/plugins/glossary', [
 		});
 
 		$('#empty-glossary').on('click', function () {
-			bootbox.confirm('Are you sure you want to delete all keywords?', function (ok) {
+			modals.confirm('Are you sure you want to delete all keywords?', function (ok) {
 				if (!ok) {
 					return;
 				}
